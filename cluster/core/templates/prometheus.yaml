@@ -1,0 +1,119 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hajimari
+  namespace: argocd
+spec:
+  project: default
+  # Source of the application manifests
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 38.0.0
+    #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
+
+    chart: prometheus-community/kube-prometheus-stack
+    helm:
+
+      # Release name override (defaults to application name)
+      releaseName: kube-prometheus-stack
+
+      # Values file as block file
+      values: |
+        grafana:
+          enabled: false
+        alertmanager:
+          enabled: false
+        prometheusOperator:
+          admissionWebhooks:
+            certManager:
+              enabled: true
+        prometheus:
+          ingress:
+            enabled: true
+            ingressClassName: "traefik"
+            hosts:
+                - host: prometheus.finnhartshorn.com
+                  paths:
+                    - /
+            tls:
+              - secretName: wildcard-tls
+                hosts:
+                  - prometheus.finnhartshorn.com
+          storageSpec:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: longhorn
+                accessModes: ["ReadWriteOnce"]
+                resources:
+                  requests:
+                    storage: 10Gi
+        kubelet:
+          enabled: true
+          serviceMonitor:
+            metricRelabelings:
+              - action: replace
+                sourceLabels:
+                  - node
+                targetLabel: instance
+        kubeApiServer:
+          enabled: true
+        kubeControllerManager:
+          enabled: true
+          endpoints:
+            - 192.168.1.221
+            - 192.168.1.222
+            - 192.168.1.223
+          service:
+            enabled: true
+            port: 10257
+            targetPort: 10257
+          serviceMonitor:
+            enabled: true
+            https: true
+            insecureSkipVerify: true
+        kubeScheduler:
+          enabled: true
+          endpoints:
+            - 192.168.1.221
+            - 192.168.1.222
+            - 192.168.1.223
+          service:
+            enabled: true
+            port: 10259
+            targetPort: 10259
+          serviceMonitor:
+            enabled: true
+            https: true
+            insecureSkipVerify: true
+        kubeProxy:
+          enabled: true
+          endpoints:
+            - 192.168.1.221
+            - 192.168.1.222
+            - 192.168.1.223
+        kubeEtcd:
+          enabled: true
+          endpoints:
+            - 192.168.1.221
+            - 192.168.1.222
+            - 192.168.1.223
+          service:
+            enabled: true
+            port: 2381
+            targetPort: 2381
+
+
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: monitoring
+
+  syncPolicy: {}
+#  syncPolicy:
+#    automated:
+#      prune: true
+#      selfHeal: true
+#    syncOptions:
+#    - CreateNamespace=true
