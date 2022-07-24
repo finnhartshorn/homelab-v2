@@ -26,7 +26,7 @@ spec:
 
   # Destination cluster and namespace to deploy the application
   destination:
-    server: https://kubernetes.default.svc
+    server: {{ .Values.spec.destination.server }}
     namespace: kube-system
 
   syncPolicy: {}
