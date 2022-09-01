@@ -23,11 +23,11 @@ spec:
         env:
           TZ: "Melbourne/Australia"
         persistence:
-          data:
+          config:
             enabled: true
             storageClass: longhorn
             size: 1Gi
-            mountPath: /data
+            mountPath: /config
             accessMode: ReadWriteOnce
             existingClaim: pvc-smb-calibre-books
         ingress:
@@ -51,7 +51,7 @@ spec:
               - hosts:
                 - "calibre.finnhartshorn.com"
                   #- "calibre.<path:secret/cluster/global#SECRET_DOMAIN>"
-                secretName: wilcard-tls
+                secretName: wildcard-tls
 
   # Destination cluster and namespace to deploy the application
   destination:
