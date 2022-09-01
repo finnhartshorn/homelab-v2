@@ -8,6 +8,7 @@ metadata:
     hajimari.io/enable: "true"
     hajimari.io/icon: "MenuBook"
     hajimari.io/appName: "Calibre"
+    traefik.ingress.kubernetes.io/router.middlewares: plex-support-calibre-proxy-header@kubernetescrd
   labels:
     app: calibre-ingress
   name: calibre-ingress
