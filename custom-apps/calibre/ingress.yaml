@@ -22,7 +22,7 @@ spec:
               service:
                 name: calibre
                 port:
-                  number: 7878
+                  number: 8080
             pathType: ImplementationSpecific
   tls:
     - hosts:
