@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: readarr
+  namespace: plex-support
+spec:
+  selector:
+    app: readarr
+  ports:
+    - port: 8787
+      protocol: TCP
+      targetPort: 8787
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,30 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/secure-backends: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "MenuBook"
+    hajimari.io/appName: "Calibre"
+  labels:
+    app: calibre-ingress
+  name: calibre-ingress
+  namespace: plex-support
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: calibre.finnhartshorn.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: calibre
+                port:
+                  number: 7878
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - calibre.finnhartshorn.com
+      secretName: wildcard-tls

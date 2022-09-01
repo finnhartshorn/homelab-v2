@@ -1,0 +1,30 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/secure-backends: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "MenuBook"
+    hajimari.io/appName: "Readarr"
+  labels:
+    app: readarr-ingress
+  name: readarr-ingress
+  namespace: plex-support
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: readarr.finnhartshorn.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: readarr
+                port:
+                  number: 7878
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - readarr.finnhartshorn.com
+      secretName: wildcard-tls

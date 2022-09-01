@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre
+  namespace: plex-support
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: calibre
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: calibre
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: calibre-config
+                optional: false
+          image: lscr.io/linuxserver/calibre:6.3.0
+          imagePullPolicy: Always
+          name: calibre
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 500m
+          volumeMounts:
+            - mountPath: /books
+              name: smb-books
+            - mountPath: /downloads
+              name: smb-downloads
+            - mountPath: /config
+              name: config
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - persistentVolumeClaim:
+            claimName: pvc-smb-calibre-books
+          name: smb-books
+        - persistentVolumeClaim:
+            claimName: pvc-smb-calibre-downloads
+          name: smb-downloads
+        - persistentVolumeClaim:
+            claimName: calibre-pvc-config
+          name: config
