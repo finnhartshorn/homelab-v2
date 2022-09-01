@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: calibre-pvc
+  namespace: argocd
+spec:
+  destination:
+    namespace: plex-support
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: custom-apps/calibre
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+  syncPolicy: {}
