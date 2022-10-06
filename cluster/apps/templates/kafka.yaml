@@ -9,7 +9,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 3.2.3
+    targetRevision: 18.5.0
     #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
 
     chart: kafka
