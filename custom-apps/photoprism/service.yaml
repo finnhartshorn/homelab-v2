@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: photoprism
+  namespace: photoprism
+spec:
+  selector:
+    app: photoprism
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 2342
+  sessionAffinity: None
+  type: ClusterIP

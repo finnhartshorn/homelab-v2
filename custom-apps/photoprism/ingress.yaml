@@ -1,0 +1,30 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "photo_library"
+    hajimari.io/appName: "PhotoPrism"
+  labels:
+    app: photoprism
+  name: photoprism
+  namespace: photoprism
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: photoprism.finnhartshorn.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: photoprism
+                port:
+                  number: 80
+            pathType: Prefix
+  tls:
+    - hosts:
+        - photoprism.finnhartshorn.com
+      secretName: wildcard-tls
