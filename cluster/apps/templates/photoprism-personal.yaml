@@ -8,7 +8,7 @@ spec:
   project: default
   # Source of the application manifests
   source:
-    path: cluster/custom-apps/photoprism
+    path: custom-apps/photoprism
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
 
