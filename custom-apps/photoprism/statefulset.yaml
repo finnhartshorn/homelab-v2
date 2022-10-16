@@ -45,12 +45,12 @@ spec:
         - persistentVolumeClaim:
             claimName: pvc-smb-photoprism-originals
           name: originals
-      volumeClaimTemplates:
-      - metadata:
-          name: photoprism
-        spec:
-          accessModes: [ "ReadWriteOnce" ]
-          storageClassName: "longhorn"
-          resources:
-            requests:
-              storage: 20Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: photoprism
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "longhorn"
+      resources:
+        requests:
+          storage: 20Gi
