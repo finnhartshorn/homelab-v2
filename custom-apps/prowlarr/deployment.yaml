@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  namespace: plex-support
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: prowlarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: prowlarr-config
+                optional: false
+          image: linuxserver/prowlarr:develop
+          imagePullPolicy: Always
+          name: prowlarr
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 500m
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - persistentVolumeClaim:
+            claimName: prowlarr-pvc-config
+          name: config

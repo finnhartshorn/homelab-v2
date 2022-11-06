@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sonarr-config
+  namespace: plex-support
+data:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: Australia/Melbourne

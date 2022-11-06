@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: external-transmission
+  name: external-transmission
+  namespace: external-services
+spec:
+  type: ExternalName
+  ports:
+    - name: external-transmission
+      port: 9091
+      targetPort: 9091
+  externalName: 192.168.1.212
+  selector:
+    app.kubernetes.io/instance: traefik
+    app.kubernetes.io/name: traefik

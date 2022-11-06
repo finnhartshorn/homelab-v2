@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: external-plex
+  name: external-plex
+  namespace: external-services
+spec:
+  type: ExternalName
+  ports:
+    - name: external-plex
+      port: 32400
+      targetPort: 32400
+  externalName: 192.168.1.212

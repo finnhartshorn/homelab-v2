@@ -1,0 +1,49 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  project: default
+  # Source of the application manifests
+  source:
+    repoURL: https://charts.longhorn.io/
+    targetRevision: 1.3.2
+    #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
+
+    chart: longhorn
+    helm:
+
+      # Release name override (defaults to application name)
+      releaseName: longhorn
+
+      # Values file as block file
+      values: |
+        persistence:
+          defaultClassReplicaCount: 2
+        ingress:
+          enabled: true
+          ingressClassName: "traefik"
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-production"
+            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+            hajimari.io/enable: "true"
+            hajimari.io/icon: "cow"
+          host: "longhorn.finnhartshorn.com"
+          tls: true
+          tlsSecret: wildcard-tls
+
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: longhorn-system
+
+  syncPolicy: {}
+#  syncPolicy:
+#    automated:
+#      prune: true
+#      selfHeal: true
+#    syncOptions:
+#    - CreateNamespace=true
