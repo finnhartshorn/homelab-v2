@@ -1,30 +1,19 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
+  name: prowlarr-ingressroute
+  namespace: plex-support
   annotations:
-    ingress.kubernetes.io/secure-backends: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hajimari.io/enable: "true"
     hajimari.io/icon: "cloud-download"
     hajimari.io/appName: "Prowlarr"
-  labels:
-    app: prowlarr-ingress
-  name: prowlarr-ingress
-  namespace: plex-support
 spec:
-  ingressClassName: traefik
-  rules:
-    - host: prowlarr.finnhartshorn.com
-      http:
-        paths:
-          - backend:
-              service:
-                name: prowlarr
-                port:
-                  number: 9696
-            pathType: ImplementationSpecific
-  tls:
-    - hosts:
-        - prowlarr.finnhartshorn.com
-      secretName: wildcard-tls
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`prowlarr.finnhartshorn.com`)
+    kind: Rule
+    services:
+    - name: prowlarr
+      port: 9696
