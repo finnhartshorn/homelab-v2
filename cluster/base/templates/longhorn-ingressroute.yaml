@@ -2,23 +2,20 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: argocd-ingressroute
-  namespace: argocd
+  name: longhorn-ingressroute
+  namespace: longhorn-system
   annotations:
     hajimari.io/enable: "true"
-    hajimari.io/icon: "code"
+    hajimari.io/icon: "storage"
     hajimari.io/group: "Management"
 spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`argocd.finnhartshorn.com`)
+  - match: Host(`longhorn.finnhartshorn.com`)
     kind: Rule
     services:
-    - name: argocd-server
-      port: 443
-      scheme: https
-      serversTransport:
-        insecureSkipVerify: true
+    - name: longhorn-frontend
+      port: 80
   tls:
     secretName: wildcard-tls
