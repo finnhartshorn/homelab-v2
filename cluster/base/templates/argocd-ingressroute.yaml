@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-ingressroute
+  namespace: argocd
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "code"
+    hajimari.io/group: "Management"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`argocd.finnhartshorn.com`)
+    kind: Rule
+    services:
+    - name: argocd-server
+      port: 443
+  tls:
+    secretName: wildcard-tls
