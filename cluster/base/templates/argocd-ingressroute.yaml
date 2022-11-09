@@ -17,5 +17,6 @@ spec:
     services:
     - name: argocd-server
       port: 443
+      scheme: https
   tls:
     secretName: wildcard-tls
