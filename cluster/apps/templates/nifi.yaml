@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nifi
-  namespace: nifi
+  namespace: argocd
 spec:
   project: default
   # Source of the application manifests

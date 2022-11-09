@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nifi-registry
-  namespace: nifi
+  namespace: argocd
 spec:
   project: default
   # Source of the application manifests
@@ -27,7 +27,7 @@ spec:
         certManager:
           enabled: true
           additionalDnsNames:
-          - nifi.finnhartshorn.com
+          - nifi-registry.finnhartshorn.com
           keystorePasswd: dAPLx7HfoG9LgLnvL9Pfel0HR3yIYXVGrhSfJ7X6
           truststorePasswd: utJyMwpFUPGSyw7PHa9bbMjLwd8YAiBr0HjIctUV
 
