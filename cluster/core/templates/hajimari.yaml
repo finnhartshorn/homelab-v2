@@ -9,7 +9,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://hajimari.io
-    targetRevision: 1.2.0
+    targetRevision: 2.0.2
     #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
 
     chart: hajimari
@@ -20,9 +20,6 @@ spec:
 
       # Values file as block file
       values: |
-        image:
-          repository: ghcr.io/toboshii/hajimari
-          tag: v0.2.0
         hajimari:
           defaultEnable: false
           namespaceSelector:
@@ -38,6 +35,10 @@ spec:
             - name: AdguardHome
               url: "https://adguard.finnhartshorn.com"
               icon: "marker-check"
+              hajimari.io/group: "Management"
+            - name: Unifi
+              url: "https://unifi.finnhartshorn.com"
+              icon: "format_underlined_squiggle"
               hajimari.io/group: "Management"
           groups:
             - name: Communicate
@@ -106,27 +107,10 @@ spec:
                   url: "https://www.technologyreview.com/"
         ingress:
           main:
-            enabled: true
-            ingressClassName: "traefik"
-            annotations:
-              cert-manager.io/cluster-issuer: "letsencrypt-production"
-              hajimari.io/enable: "true"
-              hajimari.io/icon: "weather-sunset"
-              hajimari.io/group: "Management"
-              traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-            hosts:
-              - host: "hajimari.finnhartshorn.com"
-                paths:
-                  - path: /
-                    pathType: Prefix
-            tls:
-              - hosts:
-                  - "hajimari.finnhartshorn.com"
-                secretName: "wildcard-tls"
+            enabled: false
         persistence:
           data:
             enabled: true
-            existingClaim: hajimari-config
         podAnnotations:
           configmap.reloader.stakater.com/reload: "hajimari-settings"
         resources:

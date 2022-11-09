@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: authentik-ingressroute
+  namespace: authentik
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "lock_open"
+    hajimari.io/group: "Management"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`auth.finnhartshorn.com`)
+    kind: Rule
+    services:
+    - name: authentik
+      port: 80
+  tls:
+    secretName: wildcard-tls

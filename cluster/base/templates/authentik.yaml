@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: authentik
+  namespace: argocd
+spec:
+  destination:
+    namespace: authentik
+    server: {{ .Values.spec.destination.server }}
+  project: nal-prod
+  source:
+    repoURL: https://charts.goauthentik.io
+    targetRevision: 2022.0.0
+    chart: authentik
+    helm:
+      releaseName: authentik
+      parameters: []
+      fileParameters: []
+      values: |
+        authentik:
+            secret_key: "4Nfcy3#M$H7IzU!$rrqLeJYKXPiv92Ol$n2F@M8B"
+            error_reporting:
+                enabled: false
+            postgresql:
+                password: "7wN2mMcC#nIlNe4E4YelDfd7s0KfY922H&Cv&rXJ"
+            log_level: error
+        ingress:
+            enabled: false
+        postgresql:
+            enabled: true
+            postgresqlPassword: "7wN2mMcC#nIlNe4E4YelDfd7s0KfY922H&Cv&rXJ"
+        redis:
+            enabled: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

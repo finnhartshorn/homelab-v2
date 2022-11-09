@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hajimari-ingressroute
+  namespace: hajimari
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "weather-sunset"
+    hajimari.io/group: "Management"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`hajimari.finnhartshorn.com`)
+    kind: Rule
+    services:
+    - name: hajimari
+      port: 80
+  tls:
+    secretName: wildcard-tls
