@@ -1,0 +1,49 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nifi
+  namespace: nifi
+spec:
+  project: default
+  # Source of the application manifests
+  source:
+    repoURL: https://cetic.github.io/helm-charts
+    targetRevision: v1.1.2
+    #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
+
+    chart: nifi
+    helm:
+
+      # Release name override (defaults to application name)
+      releaseName: nifi
+
+      # Values file as block file
+      values: |
+        replicaCount: 3
+        properties:
+          sensitiveKey: Hg8YVArihIpyjXoY3O2AkmWI672vAqFyqDmpvpdc
+        certManager:
+          enabled: true
+          additionalDnsNames:
+          - nifi.finnhartshorn.com
+          keystorePasswd: dAPLx7HfoG9LgLnvL9Pfel0HR3yIYXVGrhSfJ7X6
+          truststorePasswd: utJyMwpFUPGSyw7PHa9bbMjLwd8YAiBr0HjIctUV
+        registry:
+          enabled: false
+          url: https://nifi-registry.nifi.svc.cluster.local
+          port: 80
+        persistence.enabled: true
+        auth.singleUser.username: finn
+        auth.singleUser.password: badpassword
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nifi
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
