@@ -18,7 +18,6 @@ spec:
     - name: argocd-server
       port: 443
       scheme: https
-      serversTransport:
-        insecureSkipVerify: true
+      serversTransport: argocd-transport
   tls:
     secretName: wildcard-tls
