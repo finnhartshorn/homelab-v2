@@ -2,20 +2,19 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: hajimari-ingressroute
-  namespace: hajimari
+  name: grafana-ingressroute
+  namespace: grafana
   annotations:
     hajimari.io/enable: "true"
-    hajimari.io/icon: "weather-sunset"
-    hajimari.io/group: "Management"
+    hajimari.io/icon: "chart-line"
 spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`hajimari.finnhartshorn.com`)
+  - match: Host(`grafana.finnhartshorn.com`)
     kind: Rule
     services:
-    - name: hajimari
-      port: 3000
+    - name: grafana
+      port: 80
   tls:
     secretName: wildcard-tls
