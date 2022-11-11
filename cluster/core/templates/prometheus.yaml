@@ -9,7 +9,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 19.3.0
+    targetRevision: 41.7.4
     #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
 
     chart: kube-prometheus-stack
