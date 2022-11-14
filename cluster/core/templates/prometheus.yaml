@@ -14,7 +14,7 @@ spec:
 
     chart: kube-prometheus-stack
     helm:
-
+      skipCrds: true
       # Release name override (defaults to application name)
       releaseName: kube-prometheus-stack
 
