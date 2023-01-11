@@ -9,7 +9,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://helm.samipsolutions.fi
-    targetRevision: 13.6.0
+    targetRevision: 16.1.1
     #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
 
     chart: home-assistant
