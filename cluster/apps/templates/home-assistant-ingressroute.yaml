@@ -11,7 +11,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`ha.finnhartshorn.com`)
+  - match: Host(`homeassistant.finnhartshorn.com`)
     kind: Rule
     services:
     - name: home-assistant
