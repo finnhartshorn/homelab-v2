@@ -24,6 +24,7 @@ spec:
         properties:
           sensitiveKey: Hg8YVArihIpyjXoY3O2AkmWI672vAqFyqDmpvpdc
           webProxyHost: nifi.finnhartshorn.com
+          isNode: true
         certManager:
           enabled: true
           additionalDnsNames:
@@ -37,8 +38,8 @@ spec:
           url: https://nifi-registry.nifi.svc.cluster.local
           port: 80
         persistence.enabled: true
-        auth.singleUser.username: finn
-        auth.singleUser.password: badpassword
+        auth.singleUser.username: finnhartshorn
+        auth.singleUser.password: badpasswordbadpassword
 
   # Destination cluster and namespace to deploy the application
   destination:
