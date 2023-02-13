@@ -23,6 +23,7 @@ spec:
         replicaCount: 3
         properties:
           sensitiveKey: Hg8YVArihIpyjXoY3O2AkmWI672vAqFyqDmpvpdc
+          webProxyHost: nifi.finnhartshorn.com
         certManager:
           enabled: true
           additionalDnsNames:
