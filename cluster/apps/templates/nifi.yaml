@@ -38,8 +38,16 @@ spec:
           url: https://nifi-registry.nifi.svc.cluster.local
           port: 80
         persistence.enabled: true
-        auth.singleUser.username: finnhartshorn
-        auth.singleUser.password: badpasswordbadpassword
+        auth:
+          singleUser:
+            username: finnhartshorn
+            password: badpasswordbadpassword
+          oidc:
+            clientId: 74436436781a2ca412656a60dc16a1851f3e7420
+            clientSecret: 728a25cb5dbff777f3a4d5add362b877cf1f000b213c0a3cfe3345bd139fc0c4389122fd4db30fca7571fede6bb4bcb557980c139900f3d97e125fe3ca17a9af
+            claimIdentifyingUser: email
+            admin: finnhartshorn@gmail.com
+            discoveryUrl: https://auth.finnhartshorn.com/application/o/nifi/.well-known/openid-configuration
 
   # Destination cluster and namespace to deploy the application
   destination:
