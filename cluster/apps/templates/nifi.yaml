@@ -9,7 +9,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://cetic.github.io/helm-charts
-    targetRevision: v1.1.2
+    targetRevision: v1.1.3
     #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
 
     chart: nifi
@@ -27,6 +27,8 @@ spec:
           enabled: true
           additionalDnsNames:
           - nifi.finnhartshorn.com
+          # caSecrets:
+          # - san-cert-secret
           keystorePasswd: dAPLx7HfoG9LgLnvL9Pfel0HR3yIYXVGrhSfJ7X6
           truststorePasswd: utJyMwpFUPGSyw7PHa9bbMjLwd8YAiBr0HjIctUV
         registry:
