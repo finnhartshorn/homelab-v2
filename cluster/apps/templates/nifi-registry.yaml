@@ -21,7 +21,8 @@ spec:
       # Values file as block file
       values: |
         replicaCount: 1
-        image.tag: "1.20.0"
+        image:
+          tag: "1.20.0"
         properties:
           sensitiveKey: Hg8YVArihIpyjXoY3O2AkmWI672vAqFyqDmpvpdc
         certManager:
