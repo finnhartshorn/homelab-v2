@@ -9,7 +9,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://dysnix.github.io/charts
-    targetRevision: 1.1.2
+    targetRevision: 1.1.3
     #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
 
     chart: nifi-registry
