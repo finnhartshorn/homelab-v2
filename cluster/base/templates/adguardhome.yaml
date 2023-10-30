@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: adguardhome
+  namespace: argocd
+spec:
+  destination:
+    namespace: adguardhome
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: custom-apps/adguardhome
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+  syncPolicy: {}

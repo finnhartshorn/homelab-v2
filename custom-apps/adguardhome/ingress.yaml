@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: adguard-ingressroute
+  namespace: adguard
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "cloud-download"
+    hajimari.io/appName: "Adguard"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`adguard.finnhartshorn.com`)
+    kind: Rule
+    services:
+    - name: adguard-http
+      port: 3000
