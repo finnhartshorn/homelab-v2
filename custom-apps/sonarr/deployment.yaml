@@ -57,6 +57,11 @@ spec:
             - mountPath: /config
               name: config
       restartPolicy: Always
+      hostAliases:
+        - ip: "192.168.1.212"
+          hostnames:
+          - "smaba.finnhartshorn.com"
+          - "irime.finnhartshorn.com"
       terminationGracePeriodSeconds: 30
       volumes:
         - persistentVolumeClaim:
