@@ -60,7 +60,7 @@ spec:
       hostAliases:
         - ip: "192.168.1.212"
           hostnames:
-          - "smaba.finnhartshorn.com"
+          - "samba.finnhartshorn.com"
           - "irime.finnhartshorn.com"
           - "transmission.finnhartshorn.com"
       terminationGracePeriodSeconds: 30
