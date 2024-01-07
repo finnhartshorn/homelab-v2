@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ghidra
+  name: ghidra-server
   namespace: ghidra
 spec:
   selector:
-    app: ghidra
+    app: ghidra-server
   ports:
   - protocol: TCP
     port: 13100
