@@ -14,7 +14,6 @@ spec:
       labels:
         app: ghidra-server
     spec:
-      hostname: ghidra.finnhartshorn.com
       containers:
       - name: ghidra-server
         image: finnhartshorn/ghidra-server:10.3
@@ -26,6 +25,8 @@ spec:
             secretKeyRef:
               name: cert-password
               key: password
+        - name: HOSTNAME
+          value: "ghidra.finnhartshorn.com"
         ports:
         - containerPort: 13100
           name: port-1
