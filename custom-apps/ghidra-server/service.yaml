@@ -11,10 +11,13 @@ spec:
   - protocol: TCP
     port: 13100
     targetPort: 13100
+    name: port-1
   - protocol: TCP
     port: 13101
     targetPort: 13101
+    name: port-2
   - protocol: TCP
     port: 13102
     targetPort: 13102
+    name: port-3
   type: LoadBalancer
