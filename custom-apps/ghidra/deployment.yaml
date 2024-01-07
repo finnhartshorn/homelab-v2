@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghidra-deployment
+  namespace: ghidra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ghidra-server
+  template:
+    metadata:
+      labels:
+        app: ghidra-server
+    spec:
+      hostname: ghidra.finnhartshorn.com
+      containers:
+      - name: ghidra-server
+        image: finnhartshorn/ghidra-server:10.3
+        env:
+        - name: GHIDRA_CERT_PATH
+          value: "/opt/ghidra/cert"
+        - name: GHIDRA_CERT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cert-password
+              key: password
+        ports:
+        - containerPort: 13100
+          name: port-1
+          protocol: TCP
+        - containerPort: 13101
+          name: port-2
+          protocol: TCP
+        - containerPort: 13102
+          name: port-3
+          protocol: TCP
+        volumeMounts:
+        - name: ghidra-repos
+          mountPath: /srv/repositories
+        - name: ghidra-certs
+          mountPath: /opt/ghidra/cert
+      volumes:
+      - name: ghidra-repos
+        persistentVolumeClaim:
+          claimName: ghidra-pvc-repo
+      - name: ghidra-certs
+        persistentVolumeClaim:
+          claimName: ghidra-pvc-certs
