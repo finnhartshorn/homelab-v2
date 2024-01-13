@@ -8,8 +8,8 @@ spec:
   project: default
   # Source of the application manifests
   source:
-    repoURL: https://helm.samipsolutions.fi
-    targetRevision: 16.1.1
+    repoURL: https://andrenarchy.github.io/helm-charts/
+    targetRevision: 14.8.0
     #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
 
     chart: home-assistant
