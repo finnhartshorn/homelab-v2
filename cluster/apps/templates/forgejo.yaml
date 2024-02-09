@@ -54,6 +54,7 @@ spec:
               TYPE: level
           admin:
             existingSecret: forgejo-admin
+            email: finnhartshorn@gmail.com
 
   # Destination cluster and namespace to deploy the application
   destination:
