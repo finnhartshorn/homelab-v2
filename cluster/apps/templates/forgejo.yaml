@@ -10,6 +10,7 @@ spec:
   source:
     repoURL: https://codeberg.org/forgejo-contrib/forgejo-helm.git
     targetRevision: v3.0.0
+    path: ./
     #path: test/test # Need to test using path + valueFiles when pointing to a helm chart repo. + helm.parameters for prod vs dev differences
 
     # chart: forgejo
