@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: forgejo-ingressroute
+  namespace: forgejo
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "chart-line"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`git.finnhartshorn.com`)
+    kind: Rule
+    services:
+    - name: forgejo
+      port: 3000
+  tls:
+    secretName: wildcard-tls
