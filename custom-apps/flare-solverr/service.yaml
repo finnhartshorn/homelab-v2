@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flare-solverr
+  namespace: plex-support
+spec:
+  selector:
+    app: flare-solverr
+  ports:
+    - port: 8191
+      protocol: TCP
+      targetPort: 8191
+  sessionAffinity: None
+  type: ClusterIP
