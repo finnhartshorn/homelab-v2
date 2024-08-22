@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: external-upsnap-ingress
+  namespace: external-services
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`upsnap.finnhartshorn.com`)
+      kind: Rule
+      services:
+        - name: external-upsnap
+          kind: Service
+          port: 8090
+          passHostHeader: true
+  tls:
+    secretName: wildcard-tls

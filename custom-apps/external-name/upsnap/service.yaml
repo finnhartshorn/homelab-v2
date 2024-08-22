@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: external-upsnap
+  name: external-upsnap
+  namespace: external-services
+spec:
+  type: ExternalName
+  ports:
+    - name: external-upsnap
+      port: 8090
+      targetPort: 8090
+  externalName: 192.168.1.212
+  selector:
+    app.kubernetes.io/instance: traefik
+    app.kubernetes.io/name: traefik
