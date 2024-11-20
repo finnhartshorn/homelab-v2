@@ -1,7 +1,0 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: ServersTransport
-metadata:
-  name: nifi-transport
-  namespace: nifi
-spec:
-  insecureSkipVerify: true
