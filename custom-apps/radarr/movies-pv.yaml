@@ -19,7 +19,7 @@ spec:
     readOnly: false
     volumeHandle: samba-share-radarr-movies  # make sure it's a unique id in the cluster
     volumeAttributes:
-      source: "//samba.finnhartshorn.com/sambashare/Movies"
+      source: "//192.168.1.212/sambashare/Movies"
     nodeStageSecretRef:
       name: smbcreds
       namespace: default
