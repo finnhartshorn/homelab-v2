@@ -19,7 +19,7 @@ spec:
     readOnly: false
     volumeHandle: samba-share-sonarr-tv  # make sure it's a unique id in the cluster
     volumeAttributes:
-      source: "//samba.finnhartshorn.com/sambashare/Tv"
+      source: "//192.168.1.212/sambashare/Tv"
     nodeStageSecretRef:
       name: smbcreds
       namespace: default
