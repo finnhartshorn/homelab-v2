@@ -19,7 +19,7 @@ spec:
     readOnly: false
     volumeHandle: samba-share-sonarr-downloads  # make sure it's a unique id in the cluster
     volumeAttributes:
-      source: "//192.168.1.212/sambashare/Downloads"
+      source: "//samba.finnhartshorn.com/sambashare/Downloads"
     nodeStageSecretRef:
       name: smbcreds
       namespace: default
